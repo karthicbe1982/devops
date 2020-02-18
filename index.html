@@ -158,3 +158,77 @@ $ git checkout master
 
 $ git rebase master app
 
+==============================Stashing your work==============================
+
+The git stash command takes your uncommitted changes (both staged and unstaged), saves them away for later use, and then reverts them from your working copy.
+
+$ git status
+
+===================Re-applying your stashed changes=====================
+
+Popping your stash removes the changes from your stash and reapplies them to your working copy
+
+$ git stash pop
+
+
+Alternatively, you can reapply the changes to your working copy and keep them in your stash with 
+
+$git stash apply
+
+Stashing untracked or ignored files
+
+By default, running git stash will stash:
+
+    changes that have been added to your index (staged changes)
+    changes made to files that are currently tracked by Git (unstaged changes)
+
+But it will not stash:
+
+    new files in your working copy that have not yet been staged
+    files that have been ignored
+
+
+Adding the -u option (or --include-untracked) tells git stash to also stash your untracked files:
+
+$ git stash -u
+
+
+
+Managing multiple stashes
+
+$ git stash list
+
+To provide a bit more context, it's good practice to annotate your stashes with a description, using 
+
+$ git stash save "message":
+
+You can choose which stash to re-apply by passing its identifier as the last argument, for example:
+
+
+$ git stash pop stash@{2}
+
+
+$ git stash show -p
+
+
+If you decide you no longer need a particular stash, you can delete it with 
+
+$ git stash drop stash@{1}
+
+Or you can delete all of your stashes with
+
+$ git stash clear
+
+
+==============================================.gitignore========================================
+
+
+1.    tracked - a file which has been previously staged or committed;
+2.    untracked - a file which has not been staged or committed; or
+3.    ignored - a file which Git has been explicitly told to ignore.
+
+Global Git ignore rules
+
+$ git config --global core.excludesFile ~/.gitignore
+
+
